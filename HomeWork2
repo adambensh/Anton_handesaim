@@ -1,0 +1,38 @@
+from __future__ import division
+import operator
+ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.div}
+
+first_number = -1
+action = ""
+second_number = -1
+answer = 0
+
+print("Welcome to your new calculator!")
+while first_number < 0 or first_number >= 10:
+    first_number = -1
+    first_number = input("Please enter the first number (0-9): ")
+
+print("Good! Now choose your operator:")
+while action == "":
+    action = raw_input("Please choose an operator (+, -, *, /): ")
+    if action == "+" or action == "-" or action == "*" or action == "/":
+        break
+    else:
+        action = ""
+
+print("Excellent! You chose {0} Now for the second number: ".format(action))
+while second_number < 0 or second_number >= 10:
+    second_number = -1
+    second_number = input("Please enter the second number (0-9): ")
+
+if action == "/":
+    if second_number == 0:
+        print("You cant divide by 0! Please try again")
+    elif first_number % second_number != 0:
+        answer = "{0}{1}{2}={3}".format(first_number, action, second_number, ops[action](first_number,
+                                                                                         float(second_number)))
+    else:
+        answer = "{0}{1}{2}={3}".format(first_number, action, second_number, ops[action](first_number, second_number))
+else:
+    answer = "{0}{1}{2}={3}".format(first_number, action, second_number, ops[action](first_number, second_number))
+print(answer)
