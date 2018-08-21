@@ -1,0 +1,16 @@
+matrixA = [[1,0,0],
+           [0,5,1],
+           [0,0,9]]
+
+sumUnder = 0
+sumAbove = 0
+
+for i in range(0, len(matrixA)):#rows
+    for j in range(0, len(matrixA[i])):
+        if j>i:
+            sumAbove += matrixA[i][j]
+        elif j<i:
+            sumUnder += matrixA[i][j]
+
+print "Sum above main diagonal: %d"% sumAbove
+print "Sum under main diagonal: %d"% sumUnder
