@@ -1,0 +1,11 @@
+matrixA = [[1,2,3],
+           [4,5,6],
+           [7,8,9]]
+
+for i in range(0, len(matrixA)):
+    temp = matrixA[i][i]
+    matrixA[i][i] = matrixA[i][len(matrixA[i])-i-1]
+    matrixA[i][len(matrixA) - 1 - i] = temp
+
+for i in range(0, len(matrixA)):
+    print matrixA[i]
