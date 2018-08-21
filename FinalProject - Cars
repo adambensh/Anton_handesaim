@@ -1,0 +1,23 @@
+carsList = {"0000000":{"year":"1999","color":"red","model":"ford","price":15000},
+            "1111111":{"year":"2005","color":"green","model":"lexus","price":150000},
+            "2222222":{"year":"1987","color":"red","model":"toyota","price":19000},
+            "3333333":{"year":"1995","color":"yellow","model":"BMW","price":200000},
+            "4444444":{"year":"2013","color":"black","model":"hyundai","price":12000},
+            "5555555":{"year":"2010","color":"pink","model":"porche","price":250000},
+            "6666666":{"year":"2008","color":"white","model":"jeep","price":50000},
+            "7777777":{"year":"1998","color":"orange","model":"ford","price":23000},
+            "8888888":{"year":"2003","color":"brown","model":"BMW","price":100000},
+            "9999999":{"year":"2000","color":"white","model":"GMC","price":30000},
+            }
+avg = 0
+counter = 0
+# Iterate on carsList
+for car in carsList:
+    # Check if the item in carsList has color of red, if so - add its price to avg and add 1 to counter
+    if carsList[car]["color"] == "red":
+        avg += carsList[car]["price"]
+        counter += 1
+# Calculate the average of red cars prices
+avg = avg/counter
+print avg
+
