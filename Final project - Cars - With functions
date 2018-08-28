@@ -1,0 +1,123 @@
+
+# Not showing error for input smaller than 1 and bigger than 5!!!
+
+carsList = {"7584526":{"year":1999,"color":"red","model":"Ford","price":15000},
+            "6630254":{"year":2005,"color":"green","model":"lexus","price":150000},
+            "7848130":{"year":1999,"color":"red","model":"toyota","price":19000},
+            "5945213":{"year":1995,"color":"yellow","model":"BMW","price":200000},
+            "4365897":{"year":2013,"color":"black","model":"hyundai","price":12000},
+            "1150234":{"year":2010,"color":"pink","model":"porche","price":250000},
+            "6365647":{"year":2008,"color":"white","model":"jeep","price":50000},
+            "2580525":{"year":1998,"color":"orange","model":"Ford","price":23000},
+            "3785964":{"year":2003,"color":"brown","model":"BMW","price":100000},
+            "5832547":{"year":2000,"color":"white","model":"GMC","price":30000},
+            }
+#isValidOption = 1
+
+exit = 0
+
+def printError():
+    print
+    print "Error! Please choose a valid option."
+    print
+
+def printDetails(results):
+    for result in results:
+        print "%s: " % result
+        print "    Model: %s" % results[result]["model"]
+        print "    Year of manufacturing: %s" % results[result]["year"]
+        print "    Color: %s" % results[result]["color"]
+        print "    Price: $%d" % results[result]["price"]
+
+# 1. Calculate the average of red cars prices
+def avgPriceOfRedCars():
+    numberOfCars = 0
+    totalSum = 0
+    for car in carsList:
+        if carsList[car]["color"] == "red":
+            totalSum += carsList[car]["price"]
+            numberOfCars += 1
+    avg = totalSum / numberOfCars
+    print "The average price for all the red cars is $%.2f" % avg
+
+# 2. Print the hieghest price:
+def mostExpensive():
+    previousPrice = 0
+    for car in carsList:
+        if carsList[car]["price"] > previousPrice:
+            previousPrice = carsList[car]["price"]
+    print "The hieghest price is: $%d" % previousPrice
+
+# 3. Print details of all the cars made in 1999
+def carsFrom1999():
+    searchResult = {}
+    for car in carsList:
+        if carsList[car]["year"] == 1999:
+            searchResult[car] = carsList[car]
+    printDetails(searchResult)
+
+# 4. Print details of all cars made by BMW or Ford
+def fordOrBMW():
+    searchResult = {}
+    for car in carsList:
+        if carsList[car]["model"] == "BMW" or carsList[car]["model"] == "Ford":
+            searchResult[car] = carsList[car]
+    printDetails(searchResult)
+
+# 5. Print the prices that are lower than the total average
+def pricesLowerThanAvg():
+    totalAvg = 0
+    totalSum = 0
+    numberOfCars = 0
+    searchResult = {}
+    for car in carsList:
+        totalSum += carsList[car]["price"]
+        numberOfCars += 1
+    totalAvg = totalSum / numberOfCars
+    for car in carsList:
+        if carsList[car]["price"] < totalAvg:
+            searchResult[car] = carsList[car]
+    for i in searchResult:
+        print "%s: " % i,
+        print "$%d" % searchResult[i]["price"]
+
+def checkInput():
+    try:
+        val = int(userInput)
+        if -1 < val < 6:
+            if val == 1:
+                avgPriceOfRedCars()
+            elif val == 2:
+                mostExpensive()
+            elif val == 3:
+                carsFrom1999()
+            elif val == 4:
+                fordOrBMW()
+            elif val == 5:
+                pricesLowerThanAvg()
+            elif val == 0:
+                exit = 1
+            else:
+                printError()
+        else:
+            printError()
+    except:
+        printError()
+
+# Main interface
+
+print "Welcome Anton!"
+
+while exit == 0:
+    print "(1): Calculate the average price of red cars"
+    print "(2): Check which car is the most expensive"
+    print "(3): Print details of all the cars made in 1999"
+    print "(4): Print details of all cars made by BMW or Ford"
+    print "(5): Print the prices that are lower than the total average"
+    print "(0): Exit"
+    print
+    userInput = raw_input("Please choose an option by typing its number and press the Enter key:")
+    print "-----------------------------"
+    print "result:"
+    checkInput()
+    print "-----------------------------"
