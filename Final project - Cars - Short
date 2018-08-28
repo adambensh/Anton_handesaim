@@ -1,0 +1,64 @@
+carsList = {"7584526":{"year":1999,"color":"red","model":"Ford","price":15000},
+            "6630254":{"year":2005,"color":"green","model":"lexus","price":150000},
+            "7848130":{"year":1999,"color":"red","model":"toyota","price":19000},
+            "5945213":{"year":1995,"color":"yellow","model":"BMW","price":200000},
+            "4365897":{"year":2013,"color":"black","model":"hyundai","price":12000},
+            "1150234":{"year":2010,"color":"pink","model":"porche","price":250000},
+            "6365647":{"year":2008,"color":"white","model":"jeep","price":50000},
+            "2580525":{"year":1998,"color":"orange","model":"Ford","price":23000},
+            "3785964":{"year":2003,"color":"brown","model":"BMW","price":100000},
+            "5832547":{"year":2000,"color":"white","model":"GMC","price":30000},
+            }
+
+# Variables for the average and for counting the results
+avg = 0
+numberOfRedCars = 0
+previousPrice = 0
+searchResult = {}
+bmwSearchResult = {}
+LowerAvgSearchResult = {}
+totalAvg = 0
+totalSum = 0
+numberOfCars = 0
+# Iterate on carsList
+for car in carsList:
+    # Check if the item in carsList has color of red, if so - add its price to avg and add 1 to numberOfCars
+    if carsList[car]["color"] == "red":
+        avg += carsList[car]["price"]
+        numberOfRedCars += 1
+    if carsList[car]["price"] > previousPrice:
+        previousPrice = carsList[car]["price"]
+    if carsList[car]["year"] == 1999:
+        # If the current car manufacturing year matches our query - add it to the list
+        searchResult[car] = carsList[car]
+    if carsList[car]["model"] == "BMW" or carsList[car]["model"] == "Ford":
+        bmwSearchResult[car] = carsList[car]
+    totalSum += carsList[car]["price"]
+    numberOfCars += 1
+    totalAvg = totalSum / numberOfCars
+    if carsList[car]["price"] < totalAvg:
+        LowerAvgSearchResult[car] = carsList[car]
+# Calculate the average and print it
+avg = avg/numberOfRedCars
+print "1) The average price for all the red cars is %.2f"% avg
+print "2) The hieghest price is: %d"% previousPrice
+print "3)"
+for result in searchResult:
+    print "%10s: " % result
+    print "        Model: %s" % searchResult[result]["model"]
+    print "        Year of manufacturing: %s" % searchResult[result]["year"]
+    print "        Color: %s" % searchResult[result]["color"]
+    print "        Price: $%d" % searchResult[result]["price"]
+print "4)"
+for result in bmwSearchResult:
+    print "%10s: " % result
+    print "        Model: %s" % bmwSearchResult[result]["model"]
+    print "        Year of manufacturing: %s" % bmwSearchResult[result]["year"]
+    print "        Color: %s" % bmwSearchResult[result]["color"]
+    print "        Price: $%d" % bmwSearchResult[result]["price"]
+    #print bmwSearchResult[i]
+print "5)"
+for i in LowerAvgSearchResult:
+    print "%10s: "% i,
+    print LowerAvgSearchResult[i]["price"]
+
