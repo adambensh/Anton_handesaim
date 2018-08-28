@@ -1,23 +1,88 @@
-carsList = {"0000000":{"year":"1999","color":"red","model":"ford","price":15000},
-            "1111111":{"year":"2005","color":"green","model":"lexus","price":150000},
-            "2222222":{"year":"1987","color":"red","model":"toyota","price":19000},
-            "3333333":{"year":"1995","color":"yellow","model":"BMW","price":200000},
-            "4444444":{"year":"2013","color":"black","model":"hyundai","price":12000},
-            "5555555":{"year":"2010","color":"pink","model":"porche","price":250000},
-            "6666666":{"year":"2008","color":"white","model":"jeep","price":50000},
-            "7777777":{"year":"1998","color":"orange","model":"ford","price":23000},
-            "8888888":{"year":"2003","color":"brown","model":"BMW","price":100000},
-            "9999999":{"year":"2000","color":"white","model":"GMC","price":30000},
+carsList = {"7584526":{"year":1999,"color":"red","model":"Ford","price":15000},
+            "6630254":{"year":2005,"color":"green","model":"lexus","price":150000},
+            "7848130":{"year":1999,"color":"red","model":"toyota","price":19000},
+            "5945213":{"year":1995,"color":"yellow","model":"BMW","price":200000},
+            "4365897":{"year":2013,"color":"black","model":"hyundai","price":12000},
+            "1150234":{"year":2010,"color":"pink","model":"porche","price":250000},
+            "6365647":{"year":2008,"color":"white","model":"jeep","price":50000},
+            "2580525":{"year":1998,"color":"orange","model":"Ford","price":23000},
+            "3785964":{"year":2003,"color":"brown","model":"BMW","price":100000},
+            "5832547":{"year":2000,"color":"white","model":"GMC","price":30000},
             }
-avg = 0
-counter = 0
-# Iterate on carsList
-for car in carsList:
-    # Check if the item in carsList has color of red, if so - add its price to avg and add 1 to counter
-    if carsList[car]["color"] == "red":
-        avg += carsList[car]["price"]
-        counter += 1
-# Calculate the average of red cars prices
-avg = avg/counter
-print avg
 
+print
+print "1. Calculate the average price of all the red cars:"
+# Variables for counting the results and calculating the average
+numberOfCars = 0
+totalSum = 0
+# Iterate on carsList items (cars)
+for car in carsList:
+    # Check if the car has color of red, if so - add its price to totalSum and add 1 to numberOfCars
+    if carsList[car]["color"] == "red":
+        totalSum += carsList[car]["price"]
+        numberOfCars += 1
+# Calculate the average and print it
+avg = totalSum/numberOfCars
+print "The average price for all the red cars is $%.2f"% avg
+print
+
+print "2. Print the hieghest price:"
+# Variable for remembering the last price that was checked
+previousPrice = 0
+for car in carsList:
+    # Check if the current price is greater than the previous price, if so - change the previous price to the current
+    if carsList[car]["price"] > previousPrice:
+        previousPrice = carsList[car]["price"]
+print "The hieghest price is: $%d"% previousPrice
+print
+
+print "3. Print details of all the cars made in 1999:"
+# A dictionary variable for storing the matched cars
+searchResult = {}
+for car in carsList:
+    # If the current car manufacturing year matches our query - add it to the list
+    if carsList[car]["year"] == 1999:
+        searchResult[car] = carsList[car]
+# Print results
+for result in searchResult:
+    print "%s: "% result
+    print "    Model: %s"% searchResult[result]["model"]
+    print "    Year of manufacturing: %s"% searchResult[result]["year"]
+    print "    Color: %s"% searchResult[result]["color"]
+    print "    Price: $%d"% searchResult[result]["price"]
+print
+
+print "4. Print details of all cars made by BMW or Ford:"
+# A dictionary variable for storing the matched cars
+searchResult = {}
+for car in carsList:
+    if carsList[car]["model"] == "BMW" or carsList[car]["model"] == "Ford":
+        searchResult[car] = carsList[car]
+for result in searchResult:
+    print "%s: " % result
+    print "    Model: %s" % searchResult[result]["model"]
+    print "    Year of manufacturing: %s" % searchResult[result]["year"]
+    print "    Color: %s" % searchResult[result]["color"]
+    print "    Price: $%d" % searchResult[result]["price"]
+print
+
+print "5. Print the prices that are lower than the total average:"
+totalAvg = 0
+totalSum = 0
+numberOfCars = 0
+searchResult = {}
+# Calculate total price and average
+for car in carsList:
+    totalSum += carsList[car]["price"]
+    numberOfCars += 1
+totalAvg = totalSum/numberOfCars
+# Iterate on carsList and check if each car price is lower than average
+# If so - add it to searchResult
+for car in carsList:
+    if carsList[car]["price"] < totalAvg:
+        searchResult[car] = carsList[car]
+# Print result
+for i in searchResult:
+    print "%s: "% i,
+    print "$%d"% searchResult[i]["price"]
+print
